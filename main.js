@@ -2,8 +2,7 @@
 // For static hosting, each user runs on their own page
 // Assignment is based on random selection from possible names (excluding user's name)
 
-let start_seed = 7;
-let seed = start_seed;
+let seed = 7;
 
 function random() {
   var x = Math.sin(seed++) * 10000;
@@ -37,9 +36,9 @@ function getShuffledNames(possibleNames) {
 
 function getAssignedPerson(possibleNames, yourName) {
   const original_names = possibleNames;
-  seed = start_seed;
+  seed = parseInt(document.getElementById("seed").value);
   const shuffled_names = getShuffledNames(possibleNames);
-  seed = start_seed;
+  seed = parseInt(document.getElementById("seed").value);
 
   for (let i = 0; i < possibleNames.length; i++) {
     if (original_names[i] != yourName) continue;
@@ -87,4 +86,9 @@ function assign() {
 }
 
 // Run on page load to initialize any state
-document.addEventListener("DOMContentLoaded", assign);
+document.addEventListener("DOMContentLoaded", () => {
+  const start_seed = Math.floor(Math.random() * 10000);
+  document.getElementById("seed").value = start_seed;
+  seed = start_seed;
+  assign();
+});

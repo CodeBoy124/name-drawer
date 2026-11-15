@@ -1,10 +1,12 @@
 # Name drawer
 
-Imagine the following. You've got an app with two fields and a button:
+Imagine the following. You've got an app with three fields and a button:
 
 - (field) possible names
 
 - (field) your name
+
+- (field) seed
 
 - (button) get the person that has been assigned to you
 
