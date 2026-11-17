@@ -85,10 +85,34 @@ function assign() {
   }
 }
 
+function loadInviteFromURLSearchParams() {
+  let params = new URLSearchParams(document.location.search);
+  if (params.has("names")) {
+    let all_names_param = params.get("names").split("-");
+    document.getElementById("names").value = all_names_param.join(", ");
+  }
+  if (params.has("seed")) {
+    let seed_param = parseInt(params.get("seed"));
+    document.getElementById("seed").value = seed_param;
+  }
+}
+
+function copyInvite() {
+  let url = `https://codeboy124.github.io/name-drawer/?seed=${document.getElementById("seed").value}&names=${encodeURI(
+    document
+      .getElementById("names")
+      .value.split(",")
+      .map((v) => v.trim())
+      .join("-"),
+  )}`;
+  navigator.clipboard.writeText(url);
+}
+
 // Run on page load to initialize any state
 document.addEventListener("DOMContentLoaded", () => {
   const start_seed = Math.floor(Math.random() * 10000);
   document.getElementById("seed").value = start_seed;
+  loadInviteFromURLSearchParams();
   seed = start_seed;
   assign();
 });
